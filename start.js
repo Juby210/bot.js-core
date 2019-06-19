@@ -1,0 +1,1 @@
+require('./index')(['TYPING_START'], require('./config.json'))

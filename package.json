@@ -1,0 +1,23 @@
+{
+  "name": "bot.js-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juby210-PL/bot.js-core.git"
+  },
+  "author": "Juby210",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/juby210-PL/bot.js-core/issues"
+  },
+  "homepage": "https://github.com/juby210-PL/bot.js-core#readme",
+  "dependencies": {
+    "cli-colors": "0.0.2",
+    "discord.js": "^11.5.1"
+  }
+}
