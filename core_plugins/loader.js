@@ -2,7 +2,7 @@ const { readdirSync } = require('fs')
 const { join } = require('path')
 
 module.exports = () => {
-    const plugins = readdirSync(Core.config.core.plugins)
+    const plugins = readdirSync(join(__dirname, '../', Core.config.core.plugins))
     for (const plugin of plugins) {
         try {
             const p = require(join('../', Core.config.core.plugins, plugin))
