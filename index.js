@@ -33,23 +33,30 @@ class Core extends Client {
         this.anticrash = require('./core_plugins/anticrash')
 
         if(!config.gbans) this.config.gbans = []
+        if(config.core.defaultActivity) this.defaultActivity = () => this.user.setActivity(config.core.defaultActivity.text
+            .replace('{prefix}', this.prefix).replace('{servers}', this.guilds.size), { type: config.core.defaultActivity.type })
 
         if(this.beta) this.on('debug', this.console.dbg)
         this.on('ready', () => {
             this.console.info('Ready as ' + this.user.tag)
             require('./core_plugins/loader')()
             this.errorChannel = this.channels.get(config.logs.errors)
+            if(config.core.defaultActivity) this.defaultActivity()
         })
         this.on('error', err => {
             this.anticrash(false, err)
         })
+        const { serverlog } = require('./core_plugins/logger')
+        this.on('guildCreate', g => {
+            if(config.logs.servers.enabled) serverlog(g, true)
+            if(config.core.defaultActivity) this.defaultActivity()
+        })
+        this.on('guildDelete', g => {
+            if(config.logs.servers.enabled) serverlog(g)
+            if(config.core.defaultActivity) this.defaultActivity()
+        })
 
         if(config.core.handleMessage) this.on('message', m => this.handleMessage(m, this.prefix))
-        if(config.logs.servers.enabled) {
-            const { serverlog } = require('./core_plugins/logger')
-            this.on('guildCreate', g => serverlog(g, true))
-            this.on('guildDelete', g => serverlog(g))
-        }
 
         global.up = string => {
             return string[0].toUpperCase() + string.slice(1)
