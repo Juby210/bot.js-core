@@ -26,6 +26,6 @@ module.exports = (message, prefix) => {
 
     if(cmd.info.voice && !message.member.voiceChannel) return message.channel.send(new Core.embeds.erreb({ description: `You must be on voice channel to use this command` }))
 
-    cmd.run({ message, args }).catch(err => Core.anticrash(message, err))
+    cmd.run({ message, args, prefix }).catch(err => Core.anticrash(message, err))
     if(Core.config.logs.commands.enabled) log(command, message)
 }
