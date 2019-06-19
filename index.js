@@ -30,6 +30,7 @@ class Core extends Client {
         this.console = require('./core_plugins/console')
         this.embeds = require('./core_plugins/embeds')
         this.handleMessage = require('./core_plugins/message')
+        this.anticrash = require('./core_plugins/anticrash')
 
         if(!config.gbans) this.config.gbans = []
 
@@ -37,9 +38,13 @@ class Core extends Client {
         this.on('ready', () => {
             this.console.info('Ready as ' + this.user.tag)
             require('./core_plugins/loader')()
-            if(config.core.handleMessage) this.on('message', m => this.handleMessage(m, this.prefix))
+            this.errorChannel = this.channels.get(config.logs.errors)
+        })
+        this.on('error', err => {
+            this.anticrash(false, err)
         })
 
+        if(config.core.handleMessage) this.on('message', m => this.handleMessage(m, this.prefix))
         if(config.logs.servers.enabled) {
             const { serverlog } = require('./core_plugins/logger')
             this.on('guildCreate', g => serverlog(g, true))

@@ -13,5 +13,5 @@ module.exports.warn = msg => {
 }
 
 module.exports.error = msg => {
-    console.log(colors.bgRed(colors.white(' ERROR ')) + '  ' + msg)
+    console.error(colors.bgRed(colors.white(' ERROR ')) + '  ' + msg)
 }
