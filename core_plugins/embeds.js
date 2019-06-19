@@ -31,6 +31,6 @@ module.exports.erreb = class BJSErrorEmbed extends BJSEmbed {
 
 module.exports.cmdusage = class extends BJSEmbed {
     constructor(cmd, prefix) {
-        super('warn', { description: `Usage:\n\n\`${prefix}${cmd.triggers[0]} ${cmd.usage.join(`\`\n\`${prefix}${cmd.triggers[0]} `)}` })
+        super('warn', { description: `Usage:\n\n\`${prefix}${cmd.triggers[0]} ${cmd.usage.join(`\`\n\`${prefix}${cmd.triggers[0]} `)}\`` })
     }
 }
