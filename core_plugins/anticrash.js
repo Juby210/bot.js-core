@@ -1,5 +1,7 @@
 module.exports = (message, err, send = true) => {
-    Core.console.error(err)
+    if(err.stack) Core.console.error(err.stack)
+    else Core.console.error(err)
+    
     if(!message && !send) return
     const code = Math.floor(1000 + Math.random() * 9000)
 
